@@ -6,84 +6,135 @@
 //
 
 import SwiftUI
-import UIKit
-
-
 
 struct ContentView: View {
     
-    let scoreList = ["0", "15", "30", "40", "", "AD"]
-    @State var score1 = 0
-    @State var score2 = 0
-    @State var output = "No winner yet"
+    let pointsList = ["0", "15", "30", "40", "", "AD"]
+    let gamesPerSet = 6
     
-    func reset() {
-        score1 = 0
-        score2 = 0
-        //output = "No winner yet"
+    @Binding var points1: Int
+    @Binding var points2: Int
+    @Binding var games1: Int
+    @Binding var games2: Int
+    @Binding var sets1: Int
+    @Binding var sets2: Int
+    @Binding var serve1: String
+    @Binding var serve2: String
+    
+    func updateServe(changeServe: Bool) {
+        if (serve1 != " ") {
+            if (changeServe) {
+                serve1 = " "
+                serve2 = "Right"
+            }
+            else {
+                if (serve1 == "Right") {
+                    serve1 = "Left"
+                }
+                else {
+                    serve1 = "Right"
+                }
+            }
+        }
+        else {
+            if (changeServe) {
+                serve2 = " "
+                serve1 = "Right"
+            }
+            else {
+                if (serve2 == "Right") {
+                    serve2 = "Left"
+                }
+                else {
+                    serve2 = "Right"
+                }
+            }
+        }
     }
     
     var body: some View {
+        
         VStack {
-            
             HStack {
-                Button(scoreList[score1]) {
-                    if (score1 == 3 && score2 < 3) {
-                        output = "Player 1 wins"
-                        //reset()
+                VStack {
+                    HStack {
+                        Text(String(sets1))
+                        Text(String(games1))
                     }
-                    else if (score1 == 5 && score2 == 4) {
-                        output = "Player 1 wins"
+                    Button(pointsList[points1]) {
+                        if (points1 == 3 && points2 < 3 || points1 == 5 && points2 == 4) {
+                            points1 = 0
+                            points2 = 0
+                            games1 += 1
+                            if (games1 == gamesPerSet) {
+                                games1 = 0
+                                games2 = 0
+                                sets1 += 1
+                            }
+                            updateServe(changeServe: true)
+                        }
+                        else if (points1 == 3 && points2 == 3) {
+                            points1 = 5
+                            points2 = 4
+                            updateServe(changeServe: false)
+                        }
+                        else if (points1 == 4 && points2 == 5) {
+                            points1 = 3
+                            points2 = 3
+                            updateServe(changeServe: false)
+                        }
+                        else {
+                            points1 += 1
+                            updateServe(changeServe: false)
+                        }
                     }
-                    else if (score1 == 3 && score2 == 3) {
-                        score1 = 5
-                        score2 = 4
-                    }
-                    else if (score1 == 4 && score2 == 5) {
-                        score1 = 3
-                        score2 = 3
-                    }
-                    else {
-                        score1 += 1
-                    }
+                    Text(serve1)
                 }
-                Button(scoreList[score2]) {
-                    if (score2 == 3 && score1 < 3) {
-                        output = "Player 2 wins"
-                        //reset()
+                
+                VStack {
+                    HStack {
+                        Text(String(games2))
+                        Text(String(sets2))
                     }
-                    else if (score2 == 5 && score1 == 4) {
-                        output = "Player 2 wins"
+                    Button(pointsList[points2]) {
+                        
+                        if (points2 == 3 && points1 < 3 || points2 == 5 && points1 == 4) {
+                            points2 = 0
+                            points1 = 0
+                            games2 += 1
+                            if (games2 == gamesPerSet) {
+                                games2 = 0
+                                games1 = 0
+                                sets2 += 1
+                            }
+                            updateServe(changeServe: true)
+                        }
+                        else if (points2 == 3 && points1 == 3) {
+                            points2 = 5
+                            points1 = 4
+                            updateServe(changeServe: false)
+                            
+                        }
+                        else if (points2 == 4 && points1 == 5) {
+                            points2 = 3
+                            points1 = 3
+                            updateServe(changeServe: false)
+                        }
+                        else {
+                            points2 += 1
+                            updateServe(changeServe: false)
+                        }
                     }
-                    else if (score2 == 3 && score1 == 3) {
-                        score2 = 5
-                        score1 = 4
-                    }
-                    else if (score2 == 4 && score1 == 5) {
-                        score2 = 3
-                        score1 = 3
-                    }
-                    else {
-                        score2 += 1
-                    }
+                    Text(serve2)
                 }
             }
-            .padding()
-            
-            Text(output)
-            
-            Button("Reset") {
-                score1 = 0
-                score2 = 0
-                output = "No winner yet"
-            }
-            .padding()
         }
     }
 }
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
+/*
+ struct ContentView_Previews: PreviewProvider {
+ static var previews: some View {
+ ContentView()
+ }
+ }
+ */

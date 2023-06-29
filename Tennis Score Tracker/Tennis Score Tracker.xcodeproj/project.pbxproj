@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A01558972A4D643F00F8D2A0 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01558962A4D643F00F8D2A0 /* SettingsView.swift */; };
 		A0E4FA362A4C38DA00527A28 /* Tennis Score Tracker Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = A0E4FA352A4C38DA00527A28 /* Tennis Score Tracker Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A0E4FA3B2A4C38DA00527A28 /* Tennis_Score_TrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E4FA3A2A4C38DA00527A28 /* Tennis_Score_TrackerApp.swift */; };
 		A0E4FA3D2A4C38DA00527A28 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E4FA3C2A4C38DA00527A28 /* ContentView.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A01558962A4D643F00F8D2A0 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		A0E4FA2F2A4C38DA00527A28 /* Tennis Score Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tennis Score Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0E4FA352A4C38DA00527A28 /* Tennis Score Tracker Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tennis Score Tracker Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0E4FA3A2A4C38DA00527A28 /* Tennis_Score_TrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tennis_Score_TrackerApp.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 			children = (
 				A0E4FA3A2A4C38DA00527A28 /* Tennis_Score_TrackerApp.swift */,
 				A0E4FA3C2A4C38DA00527A28 /* ContentView.swift */,
+				A01558962A4D643F00F8D2A0 /* SettingsView.swift */,
 				A0E4FA3E2A4C38DB00527A28 /* Assets.xcassets */,
 				A0E4FA402A4C38DB00527A28 /* Preview Content */,
 			);
@@ -192,6 +195,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A01558972A4D643F00F8D2A0 /* SettingsView.swift in Sources */,
 				A0E4FA3D2A4C38DA00527A28 /* ContentView.swift in Sources */,
 				A0E4FA3B2A4C38DA00527A28 /* Tennis_Score_TrackerApp.swift in Sources */,
 			);
