@@ -11,14 +11,14 @@ import SwiftUI
 
 struct Tennis_Score_Tracker_Watch_AppApp: App {
     
-    @State var points1 = 0
-    @State var games1 = 0
-    @State var sets1 = 0
-    @State var points2 = 0
-    @State var games2 = 0
-    @State var sets2 = 0
-    @State var serve1 = "Right"
-    @State var serve2 = " "
+    @State var points1: Int = 0
+    @State var games1: Int = 0
+    @State var sets1: Int = 0
+    @State var points2: Int = 0
+    @State var games2: Int = 0
+    @State var sets2: Int = 0
+    @State var serve1: String = "Right"
+    @State var serve2: String = " "
     
     var body: some Scene {
         

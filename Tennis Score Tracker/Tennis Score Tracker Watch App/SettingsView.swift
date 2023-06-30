@@ -30,13 +30,5 @@ struct SettingsView: View {
             serve1 = "Right"
             serve2 = " "
         }
-        
     }
 }
-/*
-struct SettinsView_Previews: PreviewProvider {
-    static var previews: some View {
-        SettingsView()
-    }
-}
-*/

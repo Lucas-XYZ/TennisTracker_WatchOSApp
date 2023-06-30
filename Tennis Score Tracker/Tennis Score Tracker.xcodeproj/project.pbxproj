@@ -12,7 +12,6 @@
 		A0E4FA3B2A4C38DA00527A28 /* Tennis_Score_TrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E4FA3A2A4C38DA00527A28 /* Tennis_Score_TrackerApp.swift */; };
 		A0E4FA3D2A4C38DA00527A28 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E4FA3C2A4C38DA00527A28 /* ContentView.swift */; };
 		A0E4FA3F2A4C38DB00527A28 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0E4FA3E2A4C38DB00527A28 /* Assets.xcassets */; };
-		A0E4FA422A4C38DB00527A28 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0E4FA412A4C38DB00527A28 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,7 +45,6 @@
 		A0E4FA3A2A4C38DA00527A28 /* Tennis_Score_TrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tennis_Score_TrackerApp.swift; sourceTree = "<group>"; };
 		A0E4FA3C2A4C38DA00527A28 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		A0E4FA3E2A4C38DB00527A28 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		A0E4FA412A4C38DB00527A28 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,17 +82,8 @@
 				A0E4FA3C2A4C38DA00527A28 /* ContentView.swift */,
 				A01558962A4D643F00F8D2A0 /* SettingsView.swift */,
 				A0E4FA3E2A4C38DB00527A28 /* Assets.xcassets */,
-				A0E4FA402A4C38DB00527A28 /* Preview Content */,
 			);
 			path = "Tennis Score Tracker Watch App";
-			sourceTree = "<group>";
-		};
-		A0E4FA402A4C38DB00527A28 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				A0E4FA412A4C38DB00527A28 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -183,7 +172,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A0E4FA422A4C38DB00527A28 /* Preview Assets.xcassets in Resources */,
 				A0E4FA3F2A4C38DB00527A28 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -328,7 +316,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Tennis Score Tracker Watch App/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Tennis Score Tracker";
@@ -357,7 +345,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Tennis Score Tracker Watch App/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Tennis Score Tracker";
