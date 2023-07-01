@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+var matchHistory: [[Any]] = [[]]
+
 @main
 
 struct Tennis_Score_Tracker_Watch_AppApp: App {
@@ -19,6 +21,7 @@ struct Tennis_Score_Tracker_Watch_AppApp: App {
     @State var sets2: Int = 0
     @State var serve1: String = "Right"
     @State var serve2: String = " "
+    
     
     var body: some Scene {
         

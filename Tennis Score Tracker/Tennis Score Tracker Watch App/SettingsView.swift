@@ -18,17 +18,40 @@ struct SettingsView: View {
     @Binding var serve1: String
     @Binding var serve2: String
     
+    @State var undoPos: Int = 0
+    
     var body: some View {
-        
-        Button("Reset") {
-            points1 = 0
-            points2 = 0
-            games1 = 0
-            games2 = 0
-            sets1 = 0
-            sets2 = 0
-            serve1 = "Right"
-            serve2 = " "
+        VStack {
+            // Undo button
+            Button("Undo") {
+                if (matchHistory.count > 1) {
+                    undoPos = matchHistory.count - 1
+                    points1 = matchHistory[undoPos][0] as! Int
+                    points2 = matchHistory[undoPos][1] as! Int
+                    games1 = matchHistory[undoPos][2] as! Int
+                    games2 = matchHistory[undoPos][3] as! Int
+                    sets1 = matchHistory[undoPos][4] as! Int
+                    sets2 = matchHistory[undoPos][5] as! Int
+                    serve1 = matchHistory[undoPos][6] as! String
+                    serve2 = matchHistory[undoPos][7] as! String
+                    matchHistory.removeLast()
+                }
+            }
+                .padding(.vertical, 10)
+            // Reset button
+            Button("Reset") {
+                points1 = 0
+                points2 = 0
+                games1 = 0
+                games2 = 0
+                sets1 = 0
+                sets2 = 0
+                serve1 = "Right"
+                serve2 = " "
+                matchHistory = [[]]
+            }
+                .padding(.vertical, 10)
         }
+            .padding(5)
     }
 }
