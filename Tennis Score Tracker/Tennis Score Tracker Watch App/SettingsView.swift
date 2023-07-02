@@ -25,7 +25,9 @@ struct SettingsView: View {
             // Undo button
             Button("Undo") {
                 if (matchHistory.count > 1) {
+                    // Get index for latest match state
                     undoPos = matchHistory.count - 1
+                    // Set match data to previous state
                     points1 = matchHistory[undoPos][0] as! Int
                     points2 = matchHistory[undoPos][1] as! Int
                     games1 = matchHistory[undoPos][2] as! Int
@@ -34,6 +36,7 @@ struct SettingsView: View {
                     sets2 = matchHistory[undoPos][5] as! Int
                     serve1 = matchHistory[undoPos][6] as! String
                     serve2 = matchHistory[undoPos][7] as! String
+                    // Remove current match state from history
                     matchHistory.removeLast()
                 }
             }
@@ -48,7 +51,7 @@ struct SettingsView: View {
                 sets2 = 0
                 serve1 = "Right"
                 serve2 = " "
-                matchHistory = [[]]
+                //matchHistory = [[]] // Optional clear match history on reset
             }
                 .padding(.vertical, 10)
         }
