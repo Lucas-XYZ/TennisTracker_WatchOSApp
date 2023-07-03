@@ -43,6 +43,9 @@ struct SettingsView: View {
                 .padding(.vertical, 10)
             // Reset button
             Button("Reset") {
+                // Record match state
+                matchHistory.append([points1, points2, games1, games2, sets1, sets2, serve1, serve2])
+                // Reset score vars
                 points1 = 0
                 points2 = 0
                 games1 = 0

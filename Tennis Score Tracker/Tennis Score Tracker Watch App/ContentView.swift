@@ -10,7 +10,6 @@ import SwiftUI
 struct ContentView: View {
     
     let pointsList: [String] = ["0", "15", "30", "40", " ", "AD"]
-    let gamesPerSet: Int = 6
     
     @Binding var points1: Int
     @Binding var points2: Int
@@ -20,13 +19,12 @@ struct ContentView: View {
     @Binding var sets2: Int
     @Binding var serve1: String
     @Binding var serve2: String
-    @State var pointsDisplay1: String = "0"
-    @State var pointsDisplay2: String = "0"
     
     let blue: Color = Color(red: 0, green: 0, blue: 1)
     let orange: Color = Color(red: 1, green: 0.4, blue: 0)
     @State var pointsAnimate1: Bool = false
     @State var pointsAnimate2: Bool = false
+    let animationSpeed: Double = 0.9
         
     func updateServe(changeGame: Bool = false, changeSet: Bool = false, tieBreak: Bool = false) {
         if (tieBreak) {
@@ -153,8 +151,6 @@ struct ContentView: View {
                             sets1 += 1
                             updateServe(changeGame: true, changeSet: true)
                         }
-                        pointsDisplay1 = String(points1)
-                        pointsDisplay2 = String(points2)
                         updateServe(tieBreak: true)
                     }
                     // Not tie-break game
@@ -165,7 +161,7 @@ struct ContentView: View {
                             points2 = 0
                             games1 += 1
                             // Player 1 wins set
-                            if (games1 >= gamesPerSet && games1 - games2 >= 2) {
+                            if (games1 >= 6 && games1 - games2 >= 2) {
                                 games1 = 0
                                 games2 = 0
                                 sets1 += 1
@@ -192,22 +188,20 @@ struct ContentView: View {
                             points1 += 1
                             updateServe()
                         }
-                        pointsDisplay1 = pointsList[points1]
-                        pointsDisplay2 = pointsList[points2]
                     }
                     pointsAnimate1.toggle()
                 }
                 label: {
                     // Player 1 points display
-                    Text(pointsDisplay1)
+                    Text((games1 == 6 && games2 == 6) ? String(points1) : pointsList[points1])
                         .font(.system(size: 58))
                         .foregroundColor(.white)
                 }
                     .buttonBorderShape(.roundedRectangle)
                     .background(pointsAnimate1 ? blue : Color.white.opacity(0))
-                    .animation(.easeIn.speed(0.9), value: pointsAnimate1)
+                    .animation(.easeIn.speed(animationSpeed), value: pointsAnimate1)
                     .background(pointsAnimate1 ? Color.white.opacity(0) : blue)
-                    .animation(.easeInOut.speed(0.9), value: pointsAnimate1)
+                    .animation(.easeInOut.speed(animationSpeed), value: pointsAnimate1)
                     .cornerRadius(8)
 
                 // Player 1 serve message
@@ -240,6 +234,7 @@ struct ContentView: View {
                     .padding(.vertical, 4)
                     .background(.gray)
                     .containerShape(RoundedRectangle(cornerSize: CGSize(width: 5, height: 5)))
+                
                 // Player 2 scoring button
                 Button() {
                     // Record match state
@@ -256,8 +251,6 @@ struct ContentView: View {
                             sets2 += 1
                             updateServe(changeGame: true, changeSet: true)
                         }
-                        pointsDisplay1 = String(points1)
-                        pointsDisplay2 = String(points2)
                         updateServe(tieBreak: true)
                     }
                     // Not tie-break game
@@ -268,7 +261,7 @@ struct ContentView: View {
                             points1 = 0
                             games2 += 1
                             // Player 2 wins set
-                            if (games2 >= gamesPerSet && games2 - games1 >= 2) {
+                            if (games2 >= 6 && games2 - games1 >= 2) {
                                 games2 = 0
                                 games1 = 0
                                 sets2 += 1
@@ -296,23 +289,21 @@ struct ContentView: View {
                             points2 += 1
                             updateServe()
                         }
-                        pointsDisplay1 = pointsList[points1]
-                        pointsDisplay2 = pointsList[points2]
                     }
                     pointsAnimate2.toggle()
                 }
                 label: {
                     // Player 2 points display
-                    Text(pointsDisplay2)
+                    Text((games1 == 6 && games2 == 6) ? String(points2) : pointsList[points2])
                         //.padding(.vertical, 15)
                         .font(.system(size: 58))
                         .foregroundColor(.white)
                 }
                     .buttonBorderShape(.roundedRectangle)
                     .background(pointsAnimate2 ? orange : Color.white.opacity(0))
-                    .animation(.easeIn.speed(0.9), value: pointsAnimate2)
+                    .animation(.easeIn.speed(animationSpeed), value: pointsAnimate2)
                     .background(pointsAnimate2 ? Color.white.opacity(0) : orange)
-                    .animation(.easeInOut.speed(0.9), value: pointsAnimate2)
+                    .animation(.easeInOut.speed(animationSpeed), value: pointsAnimate2)
                     .cornerRadius(8)
                 // Player 2 serve message
                 Text(serve2)

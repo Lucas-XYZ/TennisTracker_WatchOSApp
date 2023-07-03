@@ -22,7 +22,6 @@ struct Tennis_Score_Tracker_Watch_AppApp: App {
     @State var serve1: String = "Right"
     @State var serve2: String = " "
     
-    
     var body: some Scene {
         
         WindowGroup {
