@@ -132,10 +132,10 @@ struct ContentView: View {
                         .background(.blue)
                         .containerShape(RoundedRectangle(cornerSize: CGSize(width: 5, height: 5)))
                 }
-                .frame(width: screenWidth * 1/2, height: screenHeight * 1/5)
-                //.padding(5)
-                .background(.gray)
-                .containerShape(RoundedRectangle(cornerSize: CGSize(width: 5, height: 5)))
+                    .frame(width: screenWidth * 1/2, height: screenHeight * 1/5)
+                    //.padding(5)
+                    .background(.gray)
+                    .containerShape(RoundedRectangle(cornerSize: CGSize(width: 5, height: 5)))
                 
                 // Player 1 scoring button
                 Button() {
@@ -193,26 +193,27 @@ struct ContentView: View {
                     }
                     pointsAnimate1.toggle()
                 }
-            label: {
-                // Player 1 points display
-                Text((games1 == 6 && games2 == 6) ? String(points1) : pointsList[points1])
-                    .font(.largeTitle)
-                    .foregroundColor(.white)
-            }
-            .frame(width: screenWidth * 1/2, height: screenHeight * 2/5)
-            //.padding(5)
-            .buttonBorderShape(.roundedRectangle)
-            .background(pointsAnimate1 ? blue : Color.white.opacity(0))
-            .animation(.easeIn.speed(animationSpeed), value: pointsAnimate1)
-            .background(pointsAnimate1 ? Color.white.opacity(0) : blue)
-            .animation(.easeInOut.speed(animationSpeed), value: pointsAnimate1)
-            .cornerRadius(8)
-                
+                label: {
+                    // Player 1 points display
+                    Text((games1 == 6 && games2 == 6) ? String(points1) : pointsList[points1])
+                        .font(.largeTitle)
+                        .foregroundColor(.white)
+                }
+                    .frame(width: screenWidth * 1/2, height: screenHeight * 2/5)
+                    //.padding(5)
+                    .buttonBorderShape(.roundedRectangle)
+                    .background(pointsAnimate1 ? blue : Color.white.opacity(0))
+                    .animation(.easeIn.speed(animationSpeed), value: pointsAnimate1)
+                    .background(pointsAnimate1 ? Color.white.opacity(0) : blue)
+                    .animation(.easeInOut.speed(animationSpeed), value: pointsAnimate1)
+                    .cornerRadius(8)
+                    
                 // Player 1 serve message
                 Text(serve1)
                     .frame(width: screenWidth * 1/2, height: screenHeight * 1/10)
                     //.padding(5)
                     .background(.gray)
+                    .opacity(serve1 == " " ? 0 : 1)
                     .containerShape(RoundedRectangle(cornerSize: CGSize(width: 5, height: 5)))
             }
             VStack {
@@ -232,10 +233,10 @@ struct ContentView: View {
                         .background(.orange)
                         .containerShape(RoundedRectangle(cornerSize: CGSize(width: 5, height: 5)))
                 }
-                .frame(width: screenWidth * 1/2, height: screenHeight * 1/5)
-                //.padding(5)
-                .background(.gray)
-                .containerShape(RoundedRectangle(cornerSize: CGSize(width: 5, height: 5)))
+                    .frame(width: screenWidth * 1/2, height: screenHeight * 1/5)
+                    //.padding(5)
+                    .background(.gray)
+                    .containerShape(RoundedRectangle(cornerSize: CGSize(width: 5, height: 5)))
                 
                 // Player 2 scoring button
                 Button() {
@@ -294,25 +295,26 @@ struct ContentView: View {
                     }
                     pointsAnimate2.toggle()
                 }
-            label: {
-                // Player 2 points display
-                Text((games1 == 6 && games2 == 6) ? String(points2) : pointsList[points2])
-                    .font(.largeTitle)
-                    .foregroundColor(.white)
-            }
-            .frame(width: screenWidth * 1/2, height: screenHeight * 2/5)
-            //.padding(5)
-            .buttonBorderShape(.roundedRectangle)
-            .background(pointsAnimate2 ? orange : Color.white.opacity(0))
-            .animation(.easeIn.speed(animationSpeed), value: pointsAnimate2)
-            .background(pointsAnimate2 ? Color.white.opacity(0) : orange)
-            .animation(.easeInOut.speed(animationSpeed), value: pointsAnimate2)
-            .cornerRadius(8)
+                label: {
+                    // Player 2 points display
+                    Text((games1 == 6 && games2 == 6) ? String(points2) : pointsList[points2])
+                        .font(.largeTitle)
+                        .foregroundColor(.white)
+                }
+                    .frame(width: screenWidth * 1/2, height: screenHeight * 2/5)
+                    //.padding(5)
+                    .buttonBorderShape(.roundedRectangle)
+                    .background(pointsAnimate2 ? orange : Color.white.opacity(0))
+                    .animation(.easeIn.speed(animationSpeed), value: pointsAnimate2)
+                    .background(pointsAnimate2 ? Color.white.opacity(0) : orange)
+                    .animation(.easeInOut.speed(animationSpeed), value: pointsAnimate2)
+                    .cornerRadius(8)
                 // Player 2 serve message
                 Text(serve2)
                     .frame(width: screenWidth * 1/2, height: screenHeight * 1/10)
                     //.padding(5)
                     .background(.gray)
+                    .opacity(serve2 == " " ? 0 : 1)
                     .containerShape(RoundedRectangle(cornerSize: CGSize(width: 5, height: 5)))
             }
         }

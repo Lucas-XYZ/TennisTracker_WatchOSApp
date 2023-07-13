@@ -22,7 +22,7 @@ struct SettingsView: View {
     @State var undoPos: Int = 0
     
     @State var timerCount = 0
-    @State var timerDisplay = "0:0"
+    @State var timerDisplay = "0:00"
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     
@@ -30,11 +30,19 @@ struct SettingsView: View {
     var body: some View {
         VStack {
             
+            // Time played display
             Text("Time Played: \(timerDisplay)")
                 .onReceive(timer) { _ in
                     timerCount += 1
-                    timerDisplay = "\((timerCount%3600)/60):\(timerCount%60)"
+                    if (timerCount%60 < 10) {
+                        timerDisplay = "\(timerCount/60):0\(timerCount%60)"
+                    }
+                    else {
+                        timerDisplay = "\(timerCount/60):\(timerCount%60)"
+
+                    }
                 }
+                .font(.body)
                 .padding(.vertical, 5)
 
             // Undo button
@@ -72,7 +80,7 @@ struct SettingsView: View {
                 //matchHistory = [[]] // Optional clear match history on reset
                 
                 timerCount = 0
-                timerDisplay = "0:0"
+                timerDisplay = "0:00"
             }
                 .padding(.vertical, 5)
         }
