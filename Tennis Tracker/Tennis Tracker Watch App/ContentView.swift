@@ -9,8 +9,9 @@ import SwiftUI
 
 struct ContentView: View {
     
-    let pointsList: [String] = ["0", "15", "30", "40", " ", "AD"]
+    let pointsList: [String] = ["0", "15", "30", "40", " ", "AD"] // Point types
     
+    // Import match vars
     @Binding var points1: Int
     @Binding var points2: Int
     @Binding var games1: Int
@@ -19,16 +20,20 @@ struct ContentView: View {
     @Binding var sets2: Int
     @Binding var serve1: String
     @Binding var serve2: String
+    @Binding var timerCount: Int
     
+    // Screen size vars
     let screenWidth: CGFloat = WKInterfaceDevice.current().screenBounds.width
     let screenHeight: CGFloat = WKInterfaceDevice.current().screenBounds.height
     
+    // Color/animate vars
     @State var pointsAnimate1: Bool = false
     @State var pointsAnimate2: Bool = false
     let blue: Color = Color(red: 0, green: 0, blue: 1)
     let orange: Color = Color(red: 1, green: 0.4, blue: 0)
     let animationSpeed: Double = 0.9
     
+    // Update serve display
     func updateServe(changeGame: Bool = false, changeSet: Bool = false, tieBreak: Bool = false) {
         if (tieBreak) {
             if ((sets1 + sets2) % 2 == 0) {
@@ -140,7 +145,7 @@ struct ContentView: View {
                 // Player 1 scoring button
                 Button() {
                     // Record match state
-                    matchHistory.append([points1, points2, games1, games2, sets1, sets2, serve1, serve2])
+                    matchHistory.append([points1, points2, games1, games2, sets1, sets2, serve1, serve2, timerCount])
                     // Tie-break game
                     if (games1 == 6 && games2 == 6) {
                         points1 += 1
@@ -241,7 +246,7 @@ struct ContentView: View {
                 // Player 2 scoring button
                 Button() {
                     // Record match state
-                    matchHistory.append([points1, points2, games1, games2, sets1, sets2, serve1, serve2])
+                    matchHistory.append([points1, points2, games1, games2, sets1, sets2, serve1, serve2, timerCount])
                     // Tie-break game
                     if (games1 == 6 && games2 == 6) {
                         points2 += 1
@@ -331,6 +336,7 @@ struct ContentView_Previews: PreviewProvider {
                     sets1: .constant(0),
                     sets2: .constant(0),
                     serve1: .constant("Right"),
-                    serve2: .constant(" "))
+                    serve2: .constant(" "),
+                    timerCount: .constant(0))
     }
 }

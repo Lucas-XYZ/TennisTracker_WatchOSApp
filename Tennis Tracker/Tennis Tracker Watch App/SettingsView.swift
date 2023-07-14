@@ -6,10 +6,10 @@
 //
 
 import SwiftUI
-import Foundation
 
 struct SettingsView: View {
     
+    // Import match vars
     @Binding var points1: Int
     @Binding var points2: Int
     @Binding var games1: Int
@@ -18,14 +18,11 @@ struct SettingsView: View {
     @Binding var sets2: Int
     @Binding var serve1: String
     @Binding var serve2: String
+    @Binding var timerCount: Int
     
-    @State var undoPos: Int = 0
+    @State var timerDisplay = "0:00" // Timer display in m:ss
     
-    @State var timerCount = 0
-    @State var timerDisplay = "0:00"
-    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    
-    
+    @State var undoPos: Int = 0 // Index latest match state
     
     var body: some View {
         VStack {
@@ -33,7 +30,8 @@ struct SettingsView: View {
             // Time played display
             Text("Time Played: \(timerDisplay)")
                 .onReceive(timer) { _ in
-                    timerCount += 1
+                    timerCount += 1 // Increase time
+                    // Convert timer display to m:ss
                     if (timerCount%60 < 10) {
                         timerDisplay = "\(timerCount/60):0\(timerCount%60)"
                     }
@@ -64,23 +62,15 @@ struct SettingsView: View {
                 }
             }
                 .padding(.vertical, 5)
-            // Reset button
-            Button("Reset") {
+            
+            // Save button
+            Button("Save") {
                 // Record match state
-                matchHistory.append([points1, points2, games1, games2, sets1, sets2, serve1, serve2])
-                // Reset score vars
-                points1 = 0
-                points2 = 0
-                games1 = 0
-                games2 = 0
-                sets1 = 0
-                sets2 = 0
-                serve1 = "Right"
-                serve2 = " "
-                //matchHistory = [[]] // Optional clear match history on reset
-                
-                timerCount = 0
-                timerDisplay = "0:00"
+                matchHistory.append([points1, points2, games1, games2, sets1, sets2, serve1, serve2, timerCount])
+                       
+                // Save match
+                savedMatches.append(matchHistory)
+                defaults.set(savedMatches, forKey: "savedMatches")
             }
                 .padding(.vertical, 5)
         }
@@ -98,6 +88,7 @@ struct SettingsView_Previews: PreviewProvider {
                     sets1: .constant(0),
                     sets2: .constant(0),
                     serve1: .constant("Right"),
-                    serve2: .constant(" "))
+                    serve2: .constant(" "),
+                    timerCount: .constant(0))
     }
 }

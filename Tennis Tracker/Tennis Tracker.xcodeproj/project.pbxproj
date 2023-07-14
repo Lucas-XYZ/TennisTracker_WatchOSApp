@@ -13,6 +13,7 @@
 		A083D4C32A53F0B600157DB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A083D4C22A53F0B600157DB7 /* Assets.xcassets */; };
 		A083D4C62A53F0B600157DB7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A083D4C52A53F0B600157DB7 /* Preview Assets.xcassets */; };
 		A083D4D12A53F10100157DB7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A083D4D02A53F10100157DB7 /* SettingsView.swift */; };
+		A0C212B52A5FF87F00560FB2 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C212B42A5FF87F00560FB2 /* MainView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		A083D4C22A53F0B600157DB7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A083D4C52A53F0B600157DB7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A083D4D02A53F10100157DB7 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		A0C212B42A5FF87F00560FB2 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 			children = (
 				A083D4BE2A53F0B500157DB7 /* Tennis_TrackerApp.swift */,
 				A083D4C02A53F0B500157DB7 /* ContentView.swift */,
+				A0C212B42A5FF87F00560FB2 /* MainView.swift */,
 				A083D4D02A53F10100157DB7 /* SettingsView.swift */,
 				A083D4C22A53F0B600157DB7 /* Assets.xcassets */,
 				A083D4C42A53F0B600157DB7 /* Preview Content */,
@@ -196,6 +199,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A083D4D12A53F10100157DB7 /* SettingsView.swift in Sources */,
+				A0C212B52A5FF87F00560FB2 /* MainView.swift in Sources */,
 				A083D4C12A53F0B500157DB7 /* ContentView.swift in Sources */,
 				A083D4BF2A53F0B500157DB7 /* Tennis_TrackerApp.swift in Sources */,
 			);
