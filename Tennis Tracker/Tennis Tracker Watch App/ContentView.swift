@@ -21,8 +21,8 @@ struct ContentView: View {
     @Binding var serve1: String
     @Binding var serve2: String
     @Binding var timerCount: Int
-    
-
+    @Binding var name1: String
+    @Binding var name2: String
     
     // Color/animate vars
     @State var pointsAnimate1: Bool = false
@@ -121,7 +121,7 @@ struct ContentView: View {
                 HStack {
                     // Player 1 sets display
                     Text(String(sets1))
-                        .frame(width: screenWidth * 1/5, height: screenHeight * 1/6)
+                        .frame(width: screenWidth * 1/5, height: screenHeight * 1/8)
                         //.padding(5)
                         .font(.body)
                         .background(.blue)
@@ -129,16 +129,24 @@ struct ContentView: View {
                 
                     // Player 1 games display
                     Text(String(games1))
-                        .frame(width: screenWidth * 1/5, height: screenHeight * 1/6)
+                        .frame(width: screenWidth * 1/5, height: screenHeight * 1/8)
                         //.padding(5)
                         .font(.body)
                         .background(.blue)
                         .containerShape(RoundedRectangle(cornerSize: CGSize(width: 5, height: 5)))
                 }
-                    .frame(width: screenWidth * 1/2, height: screenHeight * 1/5)
+                    .frame(width: screenWidth * 1/2, height: screenHeight * 1/7)
                     //.padding(5)
                     .background(.gray)
                     .containerShape(RoundedRectangle(cornerSize: CGSize(width: 5, height: 5)))
+                
+                // Name display
+                Text(name1)
+                    .frame(width: screenWidth * 1/2, height: screenHeight * 1/9)
+                    .font(.body)
+                    .background(.gray)
+                    //.foregroundColor(blue)
+                    .cornerRadius(5)
                 
                 // Player 1 scoring button
                 Button() {
@@ -223,23 +231,31 @@ struct ContentView: View {
                 HStack {
                     // Player 2 games display
                     Text(String(games2))
-                        .frame(width: screenWidth * 1/5, height: screenHeight * 1/6)
+                        .frame(width: screenWidth * 1/5, height: screenHeight * 1/8)
                         //.padding(5)
                         .font(.body)
                         .background(.orange)
                         .containerShape(RoundedRectangle(cornerSize: CGSize(width: 5, height: 5)))
                     // Player 2 sets display
                     Text(String(sets2))
-                        .frame(width: screenWidth * 1/5, height: screenHeight * 1/6)
+                        .frame(width: screenWidth * 1/5, height: screenHeight * 1/8)
                         //.padding(5)
                         .font(.body)
                         .background(.orange)
                         .containerShape(RoundedRectangle(cornerSize: CGSize(width: 5, height: 5)))
                 }
-                    .frame(width: screenWidth * 1/2, height: screenHeight * 1/5)
+                    .frame(width: screenWidth * 1/2, height: screenHeight * 1/7)
                     //.padding(5)
                     .background(.gray)
                     .containerShape(RoundedRectangle(cornerSize: CGSize(width: 5, height: 5)))
+                
+                // Name display
+                Text(name2)
+                    .frame(width: screenWidth * 1/2, height: screenHeight * 1/9)
+                    .font(.body)
+                    .background(.gray)
+                    //.foregroundColor(orange)
+                    .cornerRadius(5)
                 
                 // Player 2 scoring button
                 Button() {
@@ -335,6 +351,8 @@ struct ContentView_Previews: PreviewProvider {
                     sets2: .constant(0),
                     serve1: .constant("Right"),
                     serve2: .constant(" "),
-                    timerCount: .constant(0))
+                    timerCount: .constant(0),
+                    name1: .constant("Player 1"),
+                    name2: .constant("Player 2"))
     }
 }

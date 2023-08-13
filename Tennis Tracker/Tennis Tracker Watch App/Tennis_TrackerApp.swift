@@ -39,6 +39,8 @@ struct Tennis_Score_Tracker_Watch_AppApp: App {
     @State var serve1: String = "Right"
     @State var serve2: String = " "
     @State var timerCount: Int = 0
+    @State var name1: String = "Player 1"
+    @State var name2: String = "Player 2"
     
     var body: some Scene {
         
@@ -69,7 +71,9 @@ struct Tennis_Score_Tracker_Watch_AppApp: App {
                                 sets2: $sets2,
                                 serve1: $serve1,
                                 serve2: $serve2,
-                                timerCount: $timerCount)
+                                timerCount: $timerCount,
+                                name1: $name1,
+                                name2: $name2)
                     
                 }
                     .tag(1)
@@ -83,7 +87,9 @@ struct Tennis_Score_Tracker_Watch_AppApp: App {
                              sets2: $sets2,
                              serve1: $serve1,
                              serve2: $serve2,
-                             timerCount: $timerCount)
+                             timerCount: $timerCount,
+                             name1: $name1,
+                             name2: $name2)
                     .tag(2)
             }
             

@@ -20,6 +20,8 @@ struct SettingsView: View {
     @Binding var serve1: String
     @Binding var serve2: String
     @Binding var timerCount: Int
+    @Binding var name1: String
+    @Binding var name2: String
     
     @State var timerDisplay = "0:00" // Timer display in m:ss
     
@@ -27,6 +29,10 @@ struct SettingsView: View {
     
     var body: some View {
         VStack {
+            HStack {
+                TextField("Player 1", text: $name1)
+                TextField("Player 2", text: $name2)
+            }
             
             // Time played display
             Text("Time Played: \(timerDisplay)")
@@ -42,7 +48,7 @@ struct SettingsView: View {
                     }
                 }
                 .font(.body)
-                .padding(.vertical, 5)
+                .padding(.vertical, 3)
 
             // Undo button
             Button("Undo") {
@@ -64,7 +70,7 @@ struct SettingsView: View {
                     tabSelection = 1
                 }
             }
-                .padding(.vertical, 5)
+                .padding(.vertical, 1)
             
             // Save button
             Button("Save") {
@@ -77,9 +83,9 @@ struct SettingsView: View {
                 
                 tabSelection = 0
             }
-                .padding(.vertical, 5)
+                .padding(.vertical, 1)
         }
-            .padding(5)
+            .padding(3)
     }
 }
 
@@ -94,6 +100,8 @@ struct SettingsView_Previews: PreviewProvider {
                      sets2: .constant(0),
                      serve1: .constant("Right"),
                      serve2: .constant(" "),
-                     timerCount: .constant(0))
+                     timerCount: .constant(0),
+                     name1: .constant("Player 1"),
+                     name2: .constant("Player 2"))
     }
 }
