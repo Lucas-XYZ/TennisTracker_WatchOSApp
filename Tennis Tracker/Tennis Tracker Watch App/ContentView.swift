@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    
+    @Binding var tabSelection: Int
     let pointsList: [String] = ["0", "15", "30", "40", " ", "AD"] // Point types
     
     // Import match vars
@@ -22,9 +22,7 @@ struct ContentView: View {
     @Binding var serve2: String
     @Binding var timerCount: Int
     
-    // Screen size vars
-    let screenWidth: CGFloat = WKInterfaceDevice.current().screenBounds.width
-    let screenHeight: CGFloat = WKInterfaceDevice.current().screenBounds.height
+
     
     // Color/animate vars
     @State var pointsAnimate1: Bool = false
@@ -328,8 +326,8 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        
-        ContentView(points1: .constant(0),
+        ContentView(tabSelection: .constant(1),
+                    points1: .constant(0),
                     points2: .constant(0),
                     games1: .constant(0),
                     games2: .constant(0),

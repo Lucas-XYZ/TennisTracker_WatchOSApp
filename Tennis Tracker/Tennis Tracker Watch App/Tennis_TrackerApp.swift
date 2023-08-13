@@ -7,12 +7,15 @@
 
 import SwiftUI
 
+// Screen size vars
+let screenWidth: CGFloat = WKInterfaceDevice.current().screenBounds.width
+let screenHeight: CGFloat = WKInterfaceDevice.current().screenBounds.height
+
 // Access save data
 let defaults = UserDefaults.standard
 var savedMatches: [[[Any]]] = [[[]]]
 
 var matchHistory: [[Any]] = [[]]
-
 let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect() // Create 1s timer
 
 @main
@@ -24,6 +27,7 @@ struct Tennis_Score_Tracker_Watch_AppApp: App {
             savedMatches = defaults.object(forKey: "savedMatches") as! [[[Any]]]
         }
     }
+    @State var tabSelection = 0
     
     // Create match vars
     @State var points1: Int = 0
@@ -34,28 +38,30 @@ struct Tennis_Score_Tracker_Watch_AppApp: App {
     @State var sets2: Int = 0
     @State var serve1: String = "Right"
     @State var serve2: String = " "
-    
     @State var timerCount: Int = 0
     
     var body: some Scene {
         
         // Page layout
         WindowGroup {
-            TabView {
+            TabView(selection: $tabSelection) {
                 ScrollView {
-                    MainView(points1: $points1,
-                              points2: $points2,
-                              games1: $games1,
-                              games2: $games2,
-                              sets1: $sets1,
-                              sets2: $sets2,
-                              serve1: $serve1,
-                              serve2: $serve2,
-                              timerCount: $timerCount)
+                    MainView(tabSelection: $tabSelection,
+                             points1: $points1,
+                             points2: $points2,
+                             games1: $games1,
+                             games2: $games2,
+                             sets1: $sets1,
+                             sets2: $sets2,
+                             serve1: $serve1,
+                             serve2: $serve2,
+                             timerCount: $timerCount)
                 }
+                    .tag(0)
                 // ScrollView used to stop display error
                 ScrollView {
-                    ContentView(points1: $points1,
+                    ContentView(tabSelection: $tabSelection,
+                                points1: $points1,
                                 points2: $points2,
                                 games1: $games1,
                                 games2: $games2,
@@ -66,8 +72,10 @@ struct Tennis_Score_Tracker_Watch_AppApp: App {
                                 timerCount: $timerCount)
                     
                 }
+                    .tag(1)
                     .scrollDisabled(true)
-                SettingsView(points1: $points1,
+                SettingsView(tabSelection: $tabSelection,
+                             points1: $points1,
                              points2: $points2,
                              games1: $games1,
                              games2: $games2,
@@ -76,7 +84,9 @@ struct Tennis_Score_Tracker_Watch_AppApp: App {
                              serve1: $serve1,
                              serve2: $serve2,
                              timerCount: $timerCount)
+                    .tag(2)
             }
+            
               .tabViewStyle(PageTabViewStyle())
         }
     }

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @Binding var tabSelection: Int
     
     // Import match vars
     @Binding var points1: Int
@@ -59,6 +60,8 @@ struct SettingsView: View {
                     serve2 = matchHistory[undoPos][7] as! String
                     // Remove current match state from history
                     matchHistory.removeLast()
+                    
+                    tabSelection = 1
                 }
             }
                 .padding(.vertical, 5)
@@ -71,6 +74,8 @@ struct SettingsView: View {
                 // Save match
                 savedMatches.append(matchHistory)
                 defaults.set(savedMatches, forKey: "savedMatches")
+                
+                tabSelection = 0
             }
                 .padding(.vertical, 5)
         }
@@ -80,15 +85,15 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        
-        SettingsView(points1: .constant(0),
-                    points2: .constant(0),
-                    games1: .constant(0),
-                    games2: .constant(0),
-                    sets1: .constant(0),
-                    sets2: .constant(0),
-                    serve1: .constant("Right"),
-                    serve2: .constant(" "),
-                    timerCount: .constant(0))
+        SettingsView(tabSelection: .constant(2),
+                     points1: .constant(0),
+                     points2: .constant(0),
+                     games1: .constant(0),
+                     games2: .constant(0),
+                     sets1: .constant(0),
+                     sets2: .constant(0),
+                     serve1: .constant("Right"),
+                     serve2: .constant(" "),
+                     timerCount: .constant(0))
     }
 }

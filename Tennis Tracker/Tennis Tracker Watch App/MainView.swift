@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MainView: View {
+    @Binding var tabSelection: Int
     
     // Import match vars
     @Binding var points1: Int
@@ -25,13 +26,14 @@ struct MainView: View {
     @State var matchPos: Int = 0 // Index latest game state
     struct MatchItem: Identifiable {
         let id = UUID() // Generate unique id
+        let index: Int
         let data: [[Any]] // Match history data
         let timerDisplay: String // Time display
     }
     // Update matchList for display
     func setMatchList() {
         matchList = [] // Reset matchList
-        if (defaults.object(forKey: "savedMatches") != nil) { // Check for avaliable data
+        if (defaults.object(forKey: "savedMatches") != nil && savedMatches.count > 1) { // Check for avaliable data
             for i in 1...(savedMatches.count - 1) { // Loop through saved matches
                 
                 var timerDisplay: String // Stores timerCount in form m:ss
@@ -44,7 +46,7 @@ struct MainView: View {
 
                 }
                 
-                matchList.append(MatchItem(data: savedMatches[i], timerDisplay: timerDisplay)) // Create list item
+                matchList.append(MatchItem(index: i, data: savedMatches[i], timerDisplay: timerDisplay)) // Create list item
             }
         }
     }
@@ -64,6 +66,8 @@ struct MainView: View {
                 serve2 = " "
                 timerCount = 0
                 matchHistory = [[]]
+                
+                tabSelection = 1
             }
                 .padding(3)
                 .onAppear() { // Reload match list
@@ -72,20 +76,32 @@ struct MainView: View {
             
             // Loop though match list
             ForEach(matchList, id: \.id) {match in
-                // Display "sets1 : sets2 | m:ss"
-                Button("\(match.data[match.data.count-1][4] as! Int) : \(match.data[match.data.count-1][5] as! Int) | \(match.timerDisplay)") {
-                    // Set match vars to latest match state
-                    matchPos = match.data.count - 1
-                    points1 = match.data[matchPos][0] as! Int
-                    points2 = match.data[matchPos][1] as! Int
-                    games1 = match.data[matchPos][2] as! Int
-                    games2 = match.data[matchPos][3] as! Int
-                    sets1 = match.data[matchPos][4] as! Int
-                    sets2 = match.data[matchPos][5] as! Int
-                    serve1 = match.data[matchPos][6] as! String
-                    serve2 = match.data[matchPos][7] as! String
-                    timerCount = match.data[matchPos][8] as! Int
-                    matchHistory = match.data
+                HStack {
+                    // Display "sets1 : sets2 | m:ss"
+                    Button("\(match.data[match.data.count-1][4] as! Int) : \(match.data[match.data.count-1][5] as! Int) | \(match.timerDisplay)") {
+                        // Set match vars to latest match state
+                        matchPos = match.data.count - 1
+                        points1 = match.data[matchPos][0] as! Int
+                        points2 = match.data[matchPos][1] as! Int
+                        games1 = match.data[matchPos][2] as! Int
+                        games2 = match.data[matchPos][3] as! Int
+                        sets1 = match.data[matchPos][4] as! Int
+                        sets2 = match.data[matchPos][5] as! Int
+                        serve1 = match.data[matchPos][6] as! String
+                        serve2 = match.data[matchPos][7] as! String
+                        timerCount = match.data[matchPos][8] as! Int
+                        matchHistory = match.data
+                        
+                        tabSelection = 1
+                    }
+                    // Clear match data
+                    Button("X") {
+                        savedMatches.remove(at: match.index)
+                        defaults.set(savedMatches, forKey: "savedMatches")
+                        setMatchList() // Reload match list
+                        
+                    }
+                        .frame(width: screenWidth * 0.25)
                 }
             }
                 .padding(3)
@@ -105,14 +121,15 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView(points1: .constant(0),
-                  points2: .constant(0),
-                  games1: .constant(0),
-                  games2: .constant(0),
-                  sets1: .constant(0),
-                  sets2: .constant(0),
-                  serve1: .constant("Right"),
-                  serve2: .constant(" "),
+        MainView(tabSelection: .constant(0),
+                 points1: .constant(0),
+                 points2: .constant(0),
+                 games1: .constant(0),
+                 games2: .constant(0),
+                 sets1: .constant(0),
+                 sets2: .constant(0),
+                 serve1: .constant("Right"),
+                 serve2: .constant(" "),
                  timerCount: .constant(0))
     }
 }
