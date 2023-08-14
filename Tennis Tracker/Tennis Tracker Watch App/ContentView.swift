@@ -142,9 +142,9 @@ struct ContentView: View {
                 
                 // Name display
                 Text(name1)
-                    .frame(width: screenWidth * 1/2, height: screenHeight * 1/9)
+                    .frame(width: screenWidth * 1/2, height: screenHeight * 1/12)
                     .font(.body)
-                    .background(.gray)
+                    .background(.black)
                     //.foregroundColor(blue)
                     .cornerRadius(5)
                 
@@ -251,9 +251,9 @@ struct ContentView: View {
                 
                 // Name display
                 Text(name2)
-                    .frame(width: screenWidth * 1/2, height: screenHeight * 1/9)
+                    .frame(width: screenWidth * 1/2, height: screenHeight * 1/12)
                     .font(.body)
-                    .background(.gray)
+                    .background(.black)
                     //.foregroundColor(orange)
                     .cornerRadius(5)
                 

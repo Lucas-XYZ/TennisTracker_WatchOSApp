@@ -20,6 +20,8 @@ struct MainView: View {
     @Binding var serve1: String
     @Binding var serve2: String
     @Binding var timerCount: Int
+    @Binding var name1: String
+    @Binding var name2: String
     
     // Create match list
     @State var matchList: [MatchItem] = [] // Create match list
@@ -108,12 +110,15 @@ struct MainView: View {
             
             // Clear data button
             Button("Clear Data") {
+                UserDefaults.standard.removeObject(forKey: "savedNames") // Clear saved names
+                name1 = "Player 1"
+                name2 = "Player 2"
+                
                 UserDefaults.standard.removeObject(forKey: "savedMatches") // Clear saved data
                 savedMatches = [[[]]] // Reset saved data var
                 setMatchList() // Reload match list
             }
                 .padding(3)
-
         }
         .padding(3)
     }
@@ -130,6 +135,8 @@ struct MainView_Previews: PreviewProvider {
                  sets2: .constant(0),
                  serve1: .constant("Right"),
                  serve2: .constant(" "),
-                 timerCount: .constant(0))
+                 timerCount: .constant(0),
+                 name1: .constant("Player 1"),
+                 name2: .constant("Player 2"))
     }
 }

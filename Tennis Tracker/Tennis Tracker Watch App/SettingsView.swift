@@ -31,7 +31,9 @@ struct SettingsView: View {
         VStack {
             HStack {
                 TextField("Player 1", text: $name1)
+                    .multilineTextAlignment(.center)
                 TextField("Player 2", text: $name2)
+                    .multilineTextAlignment(.center)
             }
             
             // Time played display
@@ -81,7 +83,11 @@ struct SettingsView: View {
                 savedMatches.append(matchHistory)
                 defaults.set(savedMatches, forKey: "savedMatches")
                 
-                tabSelection = 0
+                // Save names
+                let savedNames: [String] = [name1, name2]
+                defaults.set(savedNames, forKey: "savedNames")
+                
+                tabSelection = 0 // Switch to main page
             }
                 .padding(.vertical, 1)
         }
