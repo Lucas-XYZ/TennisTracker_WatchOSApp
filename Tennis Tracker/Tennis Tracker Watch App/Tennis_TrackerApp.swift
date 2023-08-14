@@ -37,7 +37,7 @@ struct Tennis_Score_Tracker_Watch_AppApp: App {
             name2 = "Player 2"
         }
     }
-    @State var tabSelection = 0
+    @State var tabSelection: Int = 0
     
     // Create match vars
     @State var points1: Int = 0

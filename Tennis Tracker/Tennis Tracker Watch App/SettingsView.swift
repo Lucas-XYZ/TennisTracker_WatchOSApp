@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SettingsView: View {
+    
     @Binding var tabSelection: Int
     
     // Import match vars
@@ -41,7 +42,7 @@ struct SettingsView: View {
                 .onReceive(timer) { _ in
                     timerCount += 1 // Increase time
                     // Convert timer display to m:ss
-                    if (timerCount%60 < 10) {
+                    if (timerCount % 60 < 10) {
                         timerDisplay = "\(timerCount/60):0\(timerCount%60)"
                     }
                     else {
