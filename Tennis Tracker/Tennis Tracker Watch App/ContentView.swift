@@ -9,7 +9,12 @@ import SwiftUI
 
 struct ContentView: View {
     @Binding var tabSelection: Int
+    
+    // Constants
     let pointsList: [String] = ["0", "15", "30", "40", " ", "AD"] // Point types
+    let blue: Color = Color(red: 0, green: 0, blue: 1)
+    let orange: Color = Color(red: 1, green: 0.4, blue: 0)
+    let animationSpeed: Double = 0.9
     
     // Import match vars
     @Binding var points1: Int
@@ -24,17 +29,16 @@ struct ContentView: View {
     @Binding var name1: String
     @Binding var name2: String
     
-    @State var swap: Bool = false
-    
-    // Color/animate vars
+    // Animate vars
     @State var pointsAnimate1: Bool = false
     @State var pointsAnimate2: Bool = false
-    let blue: Color = Color(red: 0, green: 0, blue: 1)
-    let orange: Color = Color(red: 1, green: 0.4, blue: 0)
-    let animationSpeed: Double = 0.9
+    @State var gamesAnimate1: Bool = false
+    @State var gamesAnimate2: Bool = false
+    @State var setsAnimate1: Bool = false
+    @State var setsAnimate2: Bool = false
     
     // Update serve display
-    func updateServe(changeGame: Bool = false, changeSet: Bool = false, tieBreak: Bool = false) {
+    func updateServe() {
         if (games1 == 6 && games2 == 6) { // Tiebreak
             if ((sets1 + sets2) % 2 == 0) {
                 if ((points1 + points2) % 4 == 0) {
@@ -74,7 +78,7 @@ struct ContentView: View {
                 }
             }
         }
-        else {
+        else { // Non tiebreak
             if ((games1 + games2) % 2 == (((sets1 + sets2) % 2 == 0) ? 0 : 1)) {
                 if ((points1 + points2) % 2 == 0) {
                     serve1 = "Right"
@@ -98,9 +102,16 @@ struct ContentView: View {
         }
     }
     func updateSwap() -> Bool {
-        // Start of change game
+        // Start of game change
         if (((games1 + games2) % 2 == 1) && (points1 == 0 && points2 == 0) ) {
             return true
+        }
+        // Start of set change
+        if (points1 == 0 && points2 == 0 && games1 == 0 && games2 == 0 && matchHistory.count > 1) {
+            let prevGameState: [Int] = [matchHistory[matchHistory.count - 1][2], matchHistory[matchHistory.count - 1][3]] as! [Int]
+            if (((prevGameState[0] + prevGameState[1]) % 4 == 0) || ((prevGameState[0] + prevGameState[1]) % 4 == 3)) {
+                return true
+            }
         }
         // Middle of tiebreak
         if (games1 == 6 && games2 == 6) {
@@ -121,14 +132,20 @@ struct ContentView: View {
                         Text(String(sets1))
                             .frame(width: screenWidth * 1/5, height: screenHeight * 1/8)
                             .font(.body)
-                            .background(.blue)
+                            .background(setsAnimate1 ? .blue : Color.white.opacity(0))
+                            .animation(.easeIn.speed(animationSpeed), value: setsAnimate1)
+                            .background(setsAnimate1 ? Color.white.opacity(0) : .blue)
+                            .animation(.easeInOut.speed(animationSpeed), value: setsAnimate1)
                             .containerShape(RoundedRectangle(cornerSize: CGSize(width: 5, height: 5)))
                         
                         // Player 1 games display
                         Text(String(games1))
                             .frame(width: screenWidth * 1/5, height: screenHeight * 1/8)
                             .font(.body)
-                            .background(.blue)
+                            .background(gamesAnimate1 ? .blue : Color.white.opacity(0))
+                            .animation(.easeIn.speed(animationSpeed), value: gamesAnimate1)
+                            .background(gamesAnimate1 ? Color.white.opacity(0) : .blue)
+                            .animation(.easeInOut.speed(animationSpeed), value: gamesAnimate1)
                             .containerShape(RoundedRectangle(cornerSize: CGSize(width: 5, height: 5)))
                     }
                         .frame(width: screenWidth * 1/2, height: screenHeight * 1/7)
@@ -156,6 +173,8 @@ struct ContentView: View {
                                 games1 = 0
                                 games2 = 0
                                 sets1 += 1
+                                gamesAnimate1.toggle()
+                                setsAnimate1.toggle()
                             }
                         }
                         // Not tie-break game
@@ -165,11 +184,13 @@ struct ContentView: View {
                                 points1 = 0
                                 points2 = 0
                                 games1 += 1
+                                gamesAnimate1.toggle()
                                 // Player 1 wins set
                                 if (games1 >= 6 && games1 - games2 >= 2) {
                                     games1 = 0
                                     games2 = 0
                                     sets1 += 1
+                                    setsAnimate1.toggle()
                                 }
                             }
                             // Player 1 gets advantage
@@ -196,34 +217,36 @@ struct ContentView: View {
                         .font(.largeTitle)
                         .foregroundColor(.white)
                 }
-                .frame(width: screenWidth * 1/2, height: screenHeight * 2/5)
-                    //.padding(5)
-                .buttonBorderShape(.roundedRectangle)
-                .background(pointsAnimate1 ? blue : Color.white.opacity(0))
-                .animation(.easeIn.speed(animationSpeed), value: pointsAnimate1)
-                .background(pointsAnimate1 ? Color.white.opacity(0) : blue)
-                .animation(.easeInOut.speed(animationSpeed), value: pointsAnimate1)
-                .cornerRadius(8)
+                    .frame(width: screenWidth * 1/2, height: screenHeight * 2/5)
+                    .buttonBorderShape(.roundedRectangle)
+                    .background(pointsAnimate1 ? blue : Color.white.opacity(0))
+                    .animation(.easeIn.speed(animationSpeed), value: pointsAnimate1)
+                    .background(pointsAnimate1 ? Color.white.opacity(0) : blue)
+                    .animation(.easeInOut.speed(animationSpeed), value: pointsAnimate1)
+                    .cornerRadius(8)
                 }
                 VStack {
                     HStack {
                         // Player 2 games display
                         Text(String(games2))
                             .frame(width: screenWidth * 1/5, height: screenHeight * 1/8)
-                        //.padding(5)
                             .font(.body)
-                            .background(.orange)
+                            .background(gamesAnimate2 ? .orange : Color.white.opacity(0))
+                            .animation(.easeIn.speed(animationSpeed), value: gamesAnimate2)
+                            .background(gamesAnimate2 ? Color.white.opacity(0) : .orange)
+                            .animation(.easeInOut.speed(animationSpeed), value: gamesAnimate2)
                             .containerShape(RoundedRectangle(cornerSize: CGSize(width: 5, height: 5)))
                         // Player 2 sets display
                         Text(String(sets2))
                             .frame(width: screenWidth * 1/5, height: screenHeight * 1/8)
-                        //.padding(5)
                             .font(.body)
-                            .background(.orange)
+                            .background(setsAnimate2 ? .orange : Color.white.opacity(0))
+                            .animation(.easeIn.speed(animationSpeed), value: setsAnimate2)
+                            .background(setsAnimate2 ? Color.white.opacity(0) : .orange)
+                            .animation(.easeInOut.speed(animationSpeed), value: setsAnimate2)
                             .containerShape(RoundedRectangle(cornerSize: CGSize(width: 5, height: 5)))
                     }
                     .frame(width: screenWidth * 1/2, height: screenHeight * 1/7)
-                    //.padding(5)
                     .background(.gray)
                     .containerShape(RoundedRectangle(cornerSize: CGSize(width: 5, height: 5)))
                     
@@ -232,7 +255,6 @@ struct ContentView: View {
                         .frame(width: screenWidth * 1/2, height: screenHeight * 1/12)
                         .font(.body)
                         .background(.black)
-                    //.foregroundColor(orange)
                         .cornerRadius(5)
                     
                     // Player 2 scoring button
@@ -249,6 +271,8 @@ struct ContentView: View {
                                 games1 = 0
                                 games2 = 0
                                 sets2 += 1
+                                gamesAnimate2.toggle()
+                                setsAnimate2.toggle()
                             }
                         }
                         // Not tie-break game
@@ -258,11 +282,13 @@ struct ContentView: View {
                                 points2 = 0
                                 points1 = 0
                                 games2 += 1
+                                gamesAnimate2.toggle()
                                 // Player 2 wins set
                                 if (games2 >= 6 && games2 - games1 >= 2) {
                                     games2 = 0
                                     games1 = 0
                                     sets2 += 1
+                                    setsAnimate2.toggle()
                                 }
                             }
                             // Player 2 gets advantage
